@@ -1,19 +1,30 @@
-﻿
+﻿@using CompanyManagement.Application.Department;
+
+@model DepartmentDto 
 <h1>Create department</h1>
 
 
 <div class="col">
 	<form action="/Department/Create" method="post" >
 		<div>
-			<label class="control-label" for="name">Name</label>
-			<input class="form-control" type="text" id="Name" name="Name">
+			<label class="control-label" asp-for="Name">Name</label>
+			<input class="form-control" type="text" asp-for="Name">
+			<span asp-validation-for="Name" class="text-danger"></span>
 		</div>
 		<div>
-			<label class="control-label" for="description">Description</label>
-			<input class="form-control" type="text" id="Description" name="Description">
+			<label class="control-label" asp-for="Description">Description</label>
+			<input class="form-control" type="text" asp-for="Description">
+			<span asp-validation-for="Description" class="text-danger"></span>
 		</div>
 		<div>
 			<input type="submit" value="Create" class="btn btn-primary">
 		</div>
 	</form>
 </div>
+
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

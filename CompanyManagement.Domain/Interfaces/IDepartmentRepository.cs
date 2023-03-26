@@ -9,5 +9,7 @@ namespace CompanyManagement.Domain.Interfaces
     public interface IDepartmentRepository
     {
         Task Create(Domain.Entities.Department department);
+        Task<Domain.Entities.Department?> GetByName(string name);
+        Task<IEnumerable<Domain.Entities.Department>> GetAll(); 
     }
 }

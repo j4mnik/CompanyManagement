@@ -1,6 +1,7 @@
 ﻿using CompanyManagement.Domain.Entities;
 using CompanyManagement.Domain.Interfaces;
 using CompanyManagement.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,5 +24,12 @@ namespace CompanyManagement.Infrastructure.Repositories
             _dbContext.Add(department);
             await _dbContext.SaveChangesAsync();
         }
-    }
+
+		public async Task<IEnumerable<Department>> GetAll()
+			=> await _dbContext.Departments.ToListAsync();
+		
+
+		public Task<Department?> GetByName(string name)
+		=> _dbContext.Departments.FirstOrDefaultAsync(x => x.Name.ToLower() == name.ToLower());
+	}
 }

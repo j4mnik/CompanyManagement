@@ -26,5 +26,13 @@ namespace CompanyManagement.Application.Services
 
             await _departmentRepository.Create(department);
         }
-    }
+
+		public async Task<IEnumerable<DepartmentDto>> GetAll()
+		{
+            var departments = await _departmentRepository.GetAll();
+            var dtos = _mapper.Map<IEnumerable<DepartmentDto>>(departments);
+
+            return dtos;
+		}
+	}
 }

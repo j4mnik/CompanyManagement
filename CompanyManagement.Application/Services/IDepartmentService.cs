@@ -6,5 +6,7 @@ namespace CompanyManagement.Application.Services
     public interface IDepartmentService
     {
         Task Create(DepartmentDto department);
+
+        Task<IEnumerable<DepartmentDto>> GetAll();
     }
 }

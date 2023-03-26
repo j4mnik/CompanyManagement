@@ -13,6 +13,12 @@ namespace CompanyManagement.Controllers
             _departmentService = departmentService;
         } 
 
+        public async Task<IActionResult> Index() 
+        {
+            var departments = await _departmentService.GetAll();   
+            return View(departments); 
+        }
+
         public IActionResult Create()
         {
             return View();
@@ -21,8 +27,12 @@ namespace CompanyManagement.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(DepartmentDto department)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(department);
+            }
             await _departmentService.Create(department);
-            return RedirectToAction(nameof(Create));
+            return RedirectToAction(nameof(Index));
         }
     }
 }

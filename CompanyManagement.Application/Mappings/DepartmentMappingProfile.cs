@@ -13,7 +13,9 @@ namespace CompanyManagement.Application.Mappings
         public DepartmentMappingProfile()
         {
             CreateMap<DepartmentDto, Domain.Entities.Department>();
-     
-        }
+
+			CreateMap<Domain.Entities.Department, DepartmentDto>();
+
+		}
     }
 }
