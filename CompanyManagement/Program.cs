@@ -1,14 +1,16 @@
 using CompanyManagement.Infrastructure.Extensions;
 using CompanyManagement.Infrastructure.Persistence;
+using CompanyManagement.Application.Extensions;
 using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
 
 var app = builder.Build();
 
