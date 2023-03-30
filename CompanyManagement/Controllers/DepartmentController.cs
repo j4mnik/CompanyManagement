@@ -1,21 +1,23 @@
 ﻿using CompanyManagement.Application.Department;
-using CompanyManagement.Application.Services;
+using CompanyManagement.Application.Department.Commands.CreateDeprartment;
+using CompanyManagement.Application.Department.Queries.GetAllDepartments;
+using CompanyManagement.Application.Department.Queries.GetDepartmentByIdQuery;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CompanyManagement.Controllers
 {
     public class DepartmentController : Controller
     {
-        private readonly IDepartmentService _departmentService;
+        private readonly IMediator _mediator;
 
-        public DepartmentController(IDepartmentService departmentService) 
+        public DepartmentController(IMediator mediator) 
         {
-            _departmentService = departmentService;
-        } 
+            _mediator = mediator;         } 
 
         public async Task<IActionResult> Index() 
         {
-            var departments = await _departmentService.GetAll();   
+            var departments = await _mediator.Send(new GetAllDepartmentsQuery());
             return View(departments); 
         }
 
@@ -24,14 +26,21 @@ namespace CompanyManagement.Controllers
             return View();
         }
 
+        [Route("Department/{Id}/Details")]
+        public async Task<IActionResult> Details(int Id)
+        {
+            var dto = await _mediator.Send(new GetDepartmentByIdQuery(Id));
+            return View(dto);
+        }
+
         [HttpPost]
-        public async Task<IActionResult> Create(DepartmentDto department)
+        public async Task<IActionResult> Create(CreateDepartmentCommand command)
         {
             if (!ModelState.IsValid)
             {
-                return View(department);
+                return View(command);
             }
-            await _departmentService.Create(department);
+            await _mediator.Send(command);
             return RedirectToAction(nameof(Index));
         }
     }

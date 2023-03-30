@@ -11,5 +11,6 @@ namespace CompanyManagement.Domain.Interfaces
         Task Create(Domain.Entities.Department department);
         Task<Domain.Entities.Department?> GetByName(string name);
         Task<IEnumerable<Domain.Entities.Department>> GetAll(); 
+        Task<Domain.Entities.Department> GetById(int id);
     }
 }

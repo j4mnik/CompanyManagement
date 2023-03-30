@@ -27,9 +27,11 @@ namespace CompanyManagement.Infrastructure.Repositories
 
 		public async Task<IEnumerable<Department>> GetAll()
 			=> await _dbContext.Departments.ToListAsync();
-		
 
-		public Task<Department?> GetByName(string name)
+        public async Task<Department> GetById(int id)
+            => await _dbContext.Departments.FirstAsync(x => x.Id == id);
+
+        public Task<Department?> GetByName(string name)
 		=> _dbContext.Departments.FirstOrDefaultAsync(x => x.Name.ToLower() == name.ToLower());
 	}
 }

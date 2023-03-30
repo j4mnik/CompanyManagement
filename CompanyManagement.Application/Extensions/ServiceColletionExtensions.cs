@@ -1,9 +1,9 @@
-﻿using CompanyManagement.Application.Department;
+﻿using CompanyManagement.Application.Department.Commands.CreateDeprartment;
 using CompanyManagement.Application.Mappings;
-using CompanyManagement.Application.Services;
 using CompanyManagement.Domain.Interfaces;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -17,11 +17,11 @@ namespace CompanyManagement.Application.Extensions
     {
         public static void AddApplication(this IServiceCollection services)
         {
-            services.AddScoped<IDepartmentService, DepartmentService>();
+            services.AddMediatR(typeof(CreateDepartmentCommand));
 
             services.AddAutoMapper(typeof(DepartmentMappingProfile));
 
-            services.AddValidatorsFromAssemblyContaining<DepartmentDtoValidator>()
+            services.AddValidatorsFromAssemblyContaining<CreateDepartmentCommandValidator>()
                 .AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters();
 

@@ -1,5 +1,4 @@
-﻿using CompanyManagement.Application.Services;
-using CompanyManagement.Domain.Interfaces;
+﻿using CompanyManagement.Domain.Interfaces;
 using CompanyManagement.Infrastructure.Persistence;
 using CompanyManagement.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
