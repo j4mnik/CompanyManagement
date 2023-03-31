@@ -1,5 +1,6 @@
-﻿using AutoMapper;
+﻿ using AutoMapper;
 using CompanyManagement.Application.Department;
+using CompanyManagement.Application.Department.Commands.EditDepartment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace CompanyManagement.Application.Mappings
             CreateMap<DepartmentDto, Domain.Entities.Department>();
 
 			CreateMap<Domain.Entities.Department, DepartmentDto>();
+
+            CreateMap<DepartmentDto, EditDepartmentCommand>();
 
 		}
     }

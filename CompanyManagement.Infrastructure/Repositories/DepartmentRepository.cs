@@ -19,6 +19,9 @@ namespace CompanyManagement.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
+        public Task Commit() 
+            => _dbContext.SaveChangesAsync();
+
         public async Task Create(Department department)
         {
             _dbContext.Add(department);
@@ -33,5 +36,6 @@ namespace CompanyManagement.Infrastructure.Repositories
 
         public Task<Department?> GetByName(string name)
 		=> _dbContext.Departments.FirstOrDefaultAsync(x => x.Name.ToLower() == name.ToLower());
+
 	}
 }
