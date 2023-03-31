@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CompanyManagement.Application.ApplicationUser;
 using CompanyManagement.Domain.Interfaces;
 using MediatR;
 using System;
@@ -13,19 +14,23 @@ namespace CompanyManagement.Application.Department.Commands.CreateDeprartment
     {
         private readonly IDepartmentRepository _departmentRepository;
         private readonly IMapper _mapper;
+        private readonly IUserContext _userContext;
 
-        public CreateDepartmentCommandHandler(IDepartmentRepository departmentRepository, IMapper mapper)
+        public CreateDepartmentCommandHandler(IDepartmentRepository departmentRepository, IMapper mapper, IUserContext userContext)
         {
             _departmentRepository = departmentRepository;
             _mapper = mapper;
+            _userContext = userContext;
         }
 
         public async Task<Unit> Handle(CreateDepartmentCommand request, CancellationToken cancellationToken)
         {
             var department = _mapper.Map<Domain.Entities.Department>(request);
 
+            department.CreatedById = _userContext.GetCurrentUser().Id;
+
             await _departmentRepository.Create(department);
-           
+
             return Unit.Value;
         }
     }

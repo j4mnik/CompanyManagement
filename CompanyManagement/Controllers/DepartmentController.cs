@@ -5,6 +5,7 @@ using CompanyManagement.Application.Department.Commands.EditDepartment;
 using CompanyManagement.Application.Department.Queries.GetAllDepartments;
 using CompanyManagement.Application.Department.Queries.GetDepartmentByIdQuery;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CompanyManagement.Controllers
@@ -26,12 +27,15 @@ namespace CompanyManagement.Controllers
             return View(departments); 
         }
 
+
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CreateDepartmentCommand command)
         {
             if (!ModelState.IsValid)

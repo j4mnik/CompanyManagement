@@ -1,4 +1,5 @@
-﻿using CompanyManagement.Application.Department.Commands.CreateDeprartment;
+﻿using CompanyManagement.Application.ApplicationUser;
+using CompanyManagement.Application.Department.Commands.CreateDeprartment;
 using CompanyManagement.Application.Mappings;
 using CompanyManagement.Domain.Interfaces;
 using FluentValidation;
@@ -17,6 +18,7 @@ namespace CompanyManagement.Application.Extensions
     {
         public static void AddApplication(this IServiceCollection services)
         {
+            services.AddScoped<IUserContext, UserContext>();
             services.AddMediatR(typeof(CreateDepartmentCommand));
 
             services.AddAutoMapper(typeof(DepartmentMappingProfile));
