@@ -1,4 +1,5 @@
-﻿using CompanyManagement.Application.ApplicationUser;
+﻿using AutoMapper;
+using CompanyManagement.Application.ApplicationUser;
 using CompanyManagement.Application.Department.Commands.CreateDeprartment;
 using CompanyManagement.Application.Mappings;
 using CompanyManagement.Domain.Interfaces;
@@ -21,7 +22,13 @@ namespace CompanyManagement.Application.Extensions
             services.AddScoped<IUserContext, UserContext>();
             services.AddMediatR(typeof(CreateDepartmentCommand));
 
-            services.AddAutoMapper(typeof(DepartmentMappingProfile));
+            services.AddScoped(provider => new MapperConfiguration(cfg =>
+            {
+                var scope = provider.CreateScope();
+                var userContext = scope.ServiceProvider.GetRequiredService<IUserContext>();
+                cfg.AddProfile(new DepartmentMappingProfile(userContext));
+            }).CreateMapper());
+
 
             services.AddValidatorsFromAssemblyContaining<CreateDepartmentCommandValidator>()
                 .AddFluentValidationAutoValidation()

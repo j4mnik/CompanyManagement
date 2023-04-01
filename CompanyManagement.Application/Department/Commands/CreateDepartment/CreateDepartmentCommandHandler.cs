@@ -25,9 +25,15 @@ namespace CompanyManagement.Application.Department.Commands.CreateDeprartment
 
         public async Task<Unit> Handle(CreateDepartmentCommand request, CancellationToken cancellationToken)
         {
+            var currentUser = _userContext.GetCurrentUser();
+            if(currentUser == null || !currentUser.IsInRole("Owner"))
+            {
+                return Unit.Value;
+            }
+
             var department = _mapper.Map<Domain.Entities.Department>(request);
 
-            department.CreatedById = _userContext.GetCurrentUser().Id;
+            department.CreatedById = currentUser.Id;
 
             await _departmentRepository.Create(department);
 

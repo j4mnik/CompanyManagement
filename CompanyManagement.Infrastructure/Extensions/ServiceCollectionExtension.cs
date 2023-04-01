@@ -21,6 +21,7 @@ namespace CompanyManagement.Infrastructure.Extensions
                 configuration.GetConnectionString("CompanyManagement")));
 
             services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<CompanyManagementDbContext>();
 
 

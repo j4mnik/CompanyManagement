@@ -28,7 +28,7 @@ namespace CompanyManagement.Controllers
         }
 
 
-        [Authorize]
+        [Authorize(Roles = "Owner")]
         public IActionResult Create()
         {
             return View();
@@ -58,7 +58,13 @@ namespace CompanyManagement.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var dto = await _mediator.Send(new GetDepartmentByIdQuery(Id));
-         
+
+            if (!dto.IsEditable)
+            {
+                return RedirectToAction("NoAccess", "Home");
+            }
+
+
             EditDepartmentCommand model = _mapper.Map<EditDepartmentCommand>(dto);
 
             return View(model);

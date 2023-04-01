@@ -1,4 +1,5 @@
 ﻿ using AutoMapper;
+using CompanyManagement.Application.ApplicationUser;
 using CompanyManagement.Application.Department;
 using CompanyManagement.Application.Department.Commands.EditDepartment;
 using System;
@@ -11,11 +12,14 @@ namespace CompanyManagement.Application.Mappings
 {
     public class DepartmentMappingProfile : Profile
     {
-        public DepartmentMappingProfile()
+        public DepartmentMappingProfile(IUserContext userContext)
         {
+            var user = userContext.GetCurrentUser();
+
             CreateMap<DepartmentDto, Domain.Entities.Department>();
 
-			CreateMap<Domain.Entities.Department, DepartmentDto>();
+            CreateMap<Domain.Entities.Department, DepartmentDto>()
+                .ForMember(dto => dto.IsEditable, opt => opt.MapFrom(src => user != null && (src.CreatedById == user.Id || user.IsInRole("Moderator"))));
 
             CreateMap<DepartmentDto, EditDepartmentCommand>();
 
