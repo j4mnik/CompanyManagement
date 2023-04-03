@@ -18,10 +18,16 @@ namespace CompanyManagement.Infrastructure.Persistence
         }     
 
         public DbSet<Department> Departments { get; set; }
+        public DbSet<Project> Projects { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<Domain.Entities.Department>()
+                .HasMany(c => c.Projects)
+                .WithOne(s => s.Department)
+                .HasForeignKey(s => s.DepartmentId);
         }
     }
 }

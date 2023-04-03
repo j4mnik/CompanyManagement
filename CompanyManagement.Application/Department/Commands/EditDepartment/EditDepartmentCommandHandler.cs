@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CompanyManagement.Application.Department.Commands.EditDepartment
 {
-    internal class EditDepartmentCommandHandler : IRequestHandler<EditDepartmentCommand>
+    public class EditDepartmentCommandHandler : IRequestHandler<EditDepartmentCommand>
     {
         private readonly IDepartmentRepository _repository;
         private readonly IUserContext _userContext;

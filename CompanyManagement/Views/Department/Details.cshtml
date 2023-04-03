@@ -1,4 +1,5 @@
-﻿@model CompanyManagement.Application.Department.DepartmentDto
+﻿@using CompanyManagement.Application.Project.Commands;
+@model CompanyManagement.Application.Department.DepartmentDto
 
 @{
     ViewData["Title"] = "Details";
@@ -34,6 +35,14 @@
     @if(Model.IsEditable) {
         <a class="btn btn-outline-secondary" asp-controller="Department" asp-action="Edit" asp-route-Id="@Model.Id">Edit</a>
     }
-    <a class="btn btn-outline-secondary" asp-controller="Department" asp-action="Edit" asp-route-Id="@Model.Id">Edit</a>
     <a asp-action="Index">Back to List</a>
+    <hr />
+    <partial name="CreateProject" model="new CreateProjectCommand() { DepartmentId = Model.Id }" />
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script src="~/js/CarWorkshop/Details.js"></script>
+    }
+}

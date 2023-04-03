@@ -4,9 +4,13 @@ using CompanyManagement.Application.Department.Commands.CreateDeprartment;
 using CompanyManagement.Application.Department.Commands.EditDepartment;
 using CompanyManagement.Application.Department.Queries.GetAllDepartments;
 using CompanyManagement.Application.Department.Queries.GetDepartmentByIdQuery;
+using CompanyManagement.Application.Project.Commands;
+using CompanyManagement.Extensions;
+using CompanyManagement.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace CompanyManagement.Controllers
 {
@@ -43,6 +47,9 @@ namespace CompanyManagement.Controllers
                 return View(command);
             }
             await _mediator.Send(command);
+
+            this.SetNotification("success", $"Created department: {command.Name}");
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -83,6 +90,21 @@ namespace CompanyManagement.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        
+        [HttpPost]
+        [Authorize(Roles = "Owner")]
+        [Route("Department/Project")]
+        public async Task<IActionResult> CreateProject(CreateProjectCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+
+            }
+            await _mediator.Send(command);
+
+            return Ok();
+        }
+
+
     }
 }

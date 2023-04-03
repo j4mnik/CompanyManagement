@@ -2,6 +2,7 @@
 using CompanyManagement.Application.ApplicationUser;
 using CompanyManagement.Application.Department;
 using CompanyManagement.Application.Department.Commands.EditDepartment;
+using CompanyManagement.Application.Project;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,8 @@ namespace CompanyManagement.Application.Mappings
 
             CreateMap<DepartmentDto, EditDepartmentCommand>();
 
-		}
+            CreateMap<ProjectDto, Domain.Entities.Project>()
+            .ReverseMap();
+        }
     }
 }

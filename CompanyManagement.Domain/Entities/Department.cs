@@ -14,7 +14,8 @@ namespace CompanyManagement.Domain.Entities
         public string? Description { get; set; }
         public string? CreatedById { get; set; }
         public IdentityUser? CreatedBy { get; set; }
-
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+
+        public List<Project> Projects { get; set; } = new();
     }
 }

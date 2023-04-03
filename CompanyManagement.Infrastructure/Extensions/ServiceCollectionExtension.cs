@@ -26,6 +26,7 @@ namespace CompanyManagement.Infrastructure.Extensions
 
 
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<IProjectRepository, ProjectRepository>();
         }
     }
 }

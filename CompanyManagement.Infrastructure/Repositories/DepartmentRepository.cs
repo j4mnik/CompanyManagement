@@ -32,7 +32,7 @@ namespace CompanyManagement.Infrastructure.Repositories
 			=> await _dbContext.Departments.ToListAsync();
 
         public async Task<Department> GetById(int id)
-            => await _dbContext.Departments.FirstAsync(x => x.Id == id);
+              => await _dbContext.Departments.FirstAsync(c => c.Id == id);
 
         public Task<Department?> GetByName(string name)
 		=> _dbContext.Departments.FirstOrDefaultAsync(x => x.Name.ToLower() == name.ToLower());
