@@ -5,6 +5,7 @@ using CompanyManagement.Application.Department.Commands.EditDepartment;
 using CompanyManagement.Application.Department.Queries.GetAllDepartments;
 using CompanyManagement.Application.Department.Queries.GetDepartmentByIdQuery;
 using CompanyManagement.Application.Project.Commands;
+using CompanyManagement.Application.Project.Queries.GetProject;
 using CompanyManagement.Extensions;
 using CompanyManagement.Models;
 using MediatR;
@@ -105,6 +106,13 @@ namespace CompanyManagement.Controllers
             return Ok();
         }
 
+        [HttpGet]
+        [Route("Department/{Id}/Project")]
+        public async Task<IActionResult> GetProjects(int id)
+        {
+            var data = await _mediator.Send(new GetProjectQuery() { Id = id });
+            return Ok(data);
+        }
 
     }
 }

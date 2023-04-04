@@ -1,29 +1,30 @@
 ﻿@model IEnumerable<CompanyManagement.Application.Department.DepartmentDto>
 
 @{
-    ViewData["Title"] = "Departments";
+	ViewData["Title"] = "Departments";
 }
 
-<h1>Departments</h1>
+<div class="d-flex rounded-3 mb-4 align-items-center justify-content-center text-white" style="min-height: fit-content; height: 12rem; background-color: #1976d2;">
+	<h1>Departments</h1>
+</div>
 
 <p>
-    <a asp-action="Create" class="btn btn-secondary">Create New</a>
+	<a asp-action="Create" class="btn btn-outline-dark">Create New</a>
 </p>
 
-
 <div class="row">
-@foreach (var item in Model)
-{
-    <div class="card m-3" style="width:18rem;">
-        <div class="card-body">
-            <h5 class="card-title">@item.Name</h5>
-            <p class="card-text">@item.Description</p>
-            <a class="btn btn-primary" asp-controller="Department" asp-action="Details" asp-route-Id="@item.Id">Details</a>
-            @if(item.IsEditable)
-                {
-                    <a class="btn btn-outline-secondary" asp-controller="Department" asp-action="Edit" asp-route-Id="@item.Id">Edit</a>
-                }
-        </div>
-    </div>
-}
+	@foreach (var item in Model)
+	{
+		<div class="card m-2" style="width:24rem;">
+			<div class="card-body">
+				<h5 class="card-title">@item.Name</h5>
+				<p class="card-text">@item.Description</p>
+				<a class="btn btn-primary" asp-controller="Department" asp-action="Details" asp-route-Id="@item.Id">Details</a>
+				@if (item.IsEditable)
+				{
+					<a class="btn btn-outline-secondary" asp-controller="Department" asp-action="Edit" asp-route-Id="@item.Id">	<i class="bi bi-pencil-fill align-middle"></i> Edit</a>
+				}
+			</div>
+		</div>
+	}
 </div>

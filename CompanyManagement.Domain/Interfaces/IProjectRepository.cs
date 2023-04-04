@@ -10,5 +10,7 @@ namespace CompanyManagement.Domain.Interfaces
     public interface IProjectRepository
     {
         Task Create(Project project);
+
+        Task<IEnumerable<Project>> GetAllById(int id);
     }
 }

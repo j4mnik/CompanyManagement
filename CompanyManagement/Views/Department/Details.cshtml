@@ -2,47 +2,42 @@
 @model CompanyManagement.Application.Department.DepartmentDto
 
 @{
-    ViewData["Title"] = "Details";
+	ViewData["Title"] = "Details";
 }
 
-<h1>@Model.Name</h1>
 
-<div>
-    <h4>DepartmentDto</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-    </dl>
+<a href="@Url.Action("Index")" class="btn btn-light">
+	<i class="bi bi-arrow-left-short align-middle fs-5"></i> Return
+</a>
+
+<div class="d-flex flex-row justify-content-between mt-2 text-light p-4 rounded-3" style="background-color: rgba(12, 151, 247, 1);
+background-image: linear-gradient(0deg, rgba(12, 151, 247, 1) 0%, rgba(98, 183, 235, 1) 100%);">
+	<div class="d-flex flex-column">
+		<h6>Department</h6>
+		<h1>@Model.Name</h1>
+		<h3> @Html.DisplayFor(model => model.Description)</h3>
+	</div>
+	@if (Model.IsEditable)
+	{
+		<div class="d-flex flex-column">
+			<a class="btn btn-outline-light" asp-controller="Department" asp-action="Edit" asp-route-Id="@Model.Id">
+				<i class="bi bi-pencil-fill align-middle"></i> Edit
+			</a>
+		</div>
+	}
 </div>
-<div>
-    @if(Model.IsEditable) {
-        <a class="btn btn-outline-secondary" asp-controller="Department" asp-action="Edit" asp-route-Id="@Model.Id">Edit</a>
-    }
-    <a asp-action="Index">Back to List</a>
-    <hr />
-    <partial name="CreateProject" model="new CreateProjectCommand() { DepartmentId = Model.Id }" />
+<div class="my-4">
+	<h3>Projects</h3>
+	<partial name="CreateProject" model="new CreateProjectCommand() { DepartmentId = Model.Id }" />
+	<div class="my-4">
+		<div id="projects" class="column" data-id="@Model.Id"></div>
+	</div>
 </div>
+
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        <script src="~/js/CarWorkshop/Details.js"></script>
-    }
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+		<script src="~/js/Department/Details.js"></script>
+	}
 }
