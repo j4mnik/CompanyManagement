@@ -15,4 +15,12 @@ namespace CompanyManagement.Application.Project
         public int DepartmentId { get; set; } = default!;
         public ProjectStatus Status { get; set; } = default!;
     }
+
+    public enum ProjectStatus
+    {
+        NotStarted,
+        InProgress,
+        Completed
+    }
+
 }

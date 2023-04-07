@@ -29,5 +29,9 @@ namespace CompanyManagement.Infrastructure.Repositories
          => await _dbContext.Projects
              .Where(p => p.Department.Id == id)
              .ToListAsync();
-    }
+
+		public async Task<Project> GetById(int id)
+			=> await _dbContext.Projects.FirstAsync(c => c.Id == id);
+
+	}
 }

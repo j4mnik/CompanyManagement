@@ -46,6 +46,7 @@ namespace CompanyManagement.Application.Project.Commands
             {
                 Name = request.Name,
                 Description = request.Description,
+                Status = (Domain.Entities.ProjectStatus)request.Status,
                 DepartmentId = department.Id,
             };
 

@@ -20,16 +20,16 @@ namespace CompanyManagement.Controllers
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
-        public DepartmentController(IMediator mediator, IMapper mapper) 
+        public DepartmentController(IMediator mediator, IMapper mapper)
         {
-            _mediator = mediator;        
+            _mediator = mediator;
             _mapper = mapper;
-        } 
+        }
 
-        public async Task<IActionResult> Index() 
+        public async Task<IActionResult> Index()
         {
             var departments = await _mediator.Send(new GetAllDepartmentsQuery());
-            return View(departments); 
+            return View(departments);
         }
 
 
@@ -91,28 +91,27 @@ namespace CompanyManagement.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost]
-        [Authorize(Roles = "Owner")]
-        [Route("Department/Project")]
-        public async Task<IActionResult> CreateProject(CreateProjectCommand command)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
+		[HttpPost]
+		[Authorize(Roles = "Owner")]
+		[Route("Department/Project")]
+		public async Task<IActionResult> CreateProject(CreateProjectCommand command)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
 
-            }
-            await _mediator.Send(command);
+			}
+			await _mediator.Send(command);
 
-            return Ok();
-        }
+			return Ok();
+		}
 
-        [HttpGet]
-        [Route("Department/{Id}/Project")]
-        public async Task<IActionResult> GetProjects(int id)
-        {
-            var data = await _mediator.Send(new GetProjectQuery() { Id = id });
-            return Ok(data);
-        }
-
-    }
+		[HttpGet]
+		[Route("Department/{Id}/Project")]
+		public async Task<IActionResult> GetProjects(int id)
+		{
+			var data = await _mediator.Send(new GetProjectQuery() { Id = id });
+			return Ok(data);
+		}
+	}
 }

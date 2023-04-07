@@ -29,6 +29,7 @@ background-image: linear-gradient(0deg, rgba(12, 151, 247, 1) 0%, rgba(98, 183, 
 <div class="my-4">
 	<h3>Projects</h3>
 	<partial name="CreateProject" model="new CreateProjectCommand() { DepartmentId = Model.Id }" />
+
 	<div class="my-4">
 		<div id="projects" class="column" data-id="@Model.Id"></div>
 	</div>
