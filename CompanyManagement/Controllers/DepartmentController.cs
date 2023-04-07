@@ -33,7 +33,7 @@ namespace CompanyManagement.Controllers
         }
 
 
-        [Authorize(Roles = "Owner")]
+        [Authorize(Roles = "DepartmentManager, Admin")]
         public IActionResult Create()
         {
             return View();
@@ -92,7 +92,7 @@ namespace CompanyManagement.Controllers
         }
 
 		[HttpPost]
-		[Authorize(Roles = "Owner")]
+		[Authorize(Roles = "DepartmentManager, Admin")]
 		[Route("Department/Project")]
 		public async Task<IActionResult> CreateProject(CreateProjectCommand command)
 		{
