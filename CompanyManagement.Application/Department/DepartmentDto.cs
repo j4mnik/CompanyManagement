@@ -1,4 +1,5 @@
-﻿using CompanyManagement.Domain.Entities;
+﻿using CompanyManagement.Application.Employee;
+using CompanyManagement.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,6 +20,6 @@ namespace CompanyManagement.Application.Department
 
         public bool IsEditable { get; set; }
 
-        public List<User> Users { get; set; } = new();
+        public List<EmployeeDto> Users { get; set; } = new();
     }
 }

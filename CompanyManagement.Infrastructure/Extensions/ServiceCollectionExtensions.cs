@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace CompanyManagement.Infrastructure.Extensions
 {
-    public static class ServiceCollectionExtension
+    public static class ServiceCollectionExtensions
     {
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
@@ -27,8 +27,8 @@ namespace CompanyManagement.Infrastructure.Extensions
     
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
-       
         }
     }
 }

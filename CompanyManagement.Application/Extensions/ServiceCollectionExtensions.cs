@@ -2,6 +2,7 @@
 using CompanyManagement.Application.ApplicationUser;
 using CompanyManagement.Application.Department.Commands.CreateDeprartment;
 using CompanyManagement.Application.Mappings;
+using CompanyManagement.Application.Services;
 using CompanyManagement.Domain.Interfaces;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -19,21 +20,22 @@ namespace CompanyManagement.Application.Extensions
     {
         public static void AddApplication(this IServiceCollection services)
         {
-            services.AddScoped<IUserContext, UserContext>();
+            services.AddAutoMapper(typeof(EmployeeMappingProfile));
             services.AddMediatR(typeof(CreateDepartmentCommand));
+            services.AddScoped<IUserContext, UserContext>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
 
             services.AddScoped(provider => new MapperConfiguration(cfg =>
             {
                 var scope = provider.CreateScope();
                 var userContext = scope.ServiceProvider.GetRequiredService<IUserContext>();
                 cfg.AddProfile(new DepartmentMappingProfile(userContext));
+                cfg.AddProfile(new EmployeeMappingProfile());
             }).CreateMapper());
-
 
             services.AddValidatorsFromAssemblyContaining<CreateDepartmentCommandValidator>()
                 .AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters();
-
         }
     }
 }

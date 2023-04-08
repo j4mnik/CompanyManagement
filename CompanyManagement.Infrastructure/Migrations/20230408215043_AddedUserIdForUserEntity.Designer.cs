@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CompanyManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(CompanyManagementDbContext))]
-    [Migration("20230408124845_Init")]
-    partial class Init
+    [Migration("20230408215043_AddedUserIdForUserEntity")]
+    partial class AddedUserIdForUserEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,6 +61,12 @@ namespace CompanyManagement.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<decimal>("ActualCost")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Budget")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
@@ -68,9 +74,15 @@ namespace CompanyManagement.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -292,7 +304,7 @@ namespace CompanyManagement.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("CompanyManagement.Domain.Entities.User", b =>
+            modelBuilder.Entity("CompanyManagement.Domain.Entities.Employee", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
@@ -312,7 +324,7 @@ namespace CompanyManagement.Infrastructure.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.HasDiscriminator().HasValue("User");
+                    b.HasDiscriminator().HasValue("Employee");
                 });
 
             modelBuilder.Entity("CompanyManagement.Domain.Entities.Department", b =>
@@ -386,10 +398,10 @@ namespace CompanyManagement.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CompanyManagement.Domain.Entities.User", b =>
+            modelBuilder.Entity("CompanyManagement.Domain.Entities.Employee", b =>
                 {
                     b.HasOne("CompanyManagement.Domain.Entities.Department", "Department")
-                        .WithMany("Users")
+                        .WithMany("Employees")
                         .HasForeignKey("DepartmentId");
 
                     b.Navigation("Department");
@@ -397,9 +409,9 @@ namespace CompanyManagement.Infrastructure.Migrations
 
             modelBuilder.Entity("CompanyManagement.Domain.Entities.Department", b =>
                 {
-                    b.Navigation("Projects");
+                    b.Navigation("Employees");
 
-                    b.Navigation("Users");
+                    b.Navigation("Projects");
                 });
 #pragma warning restore 612, 618
         }

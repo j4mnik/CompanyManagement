@@ -173,6 +173,10 @@ namespace CompanyManagement.Infrastructure.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Budget = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ActualCost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     DepartmentId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

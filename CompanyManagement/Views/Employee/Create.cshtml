@@ -1,0 +1,34 @@
+﻿@model CompanyManagement.Application.Employee.EmployeeDto
+
+<h2>Create New Employee</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FirstName)
+        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LastName)
+        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email)
+        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CreatedDate)
+        @Html.TextBoxFor(model => model.CreatedDate, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+    </div>
+}
+

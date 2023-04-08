@@ -301,7 +301,7 @@ namespace CompanyManagement.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("CompanyManagement.Domain.Entities.User", b =>
+            modelBuilder.Entity("CompanyManagement.Domain.Entities.Employee", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
@@ -321,7 +321,7 @@ namespace CompanyManagement.Infrastructure.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.HasDiscriminator().HasValue("User");
+                    b.HasDiscriminator().HasValue("Employee");
                 });
 
             modelBuilder.Entity("CompanyManagement.Domain.Entities.Department", b =>
@@ -395,10 +395,10 @@ namespace CompanyManagement.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CompanyManagement.Domain.Entities.User", b =>
+            modelBuilder.Entity("CompanyManagement.Domain.Entities.Employee", b =>
                 {
                     b.HasOne("CompanyManagement.Domain.Entities.Department", "Department")
-                        .WithMany("Users")
+                        .WithMany("Employees")
                         .HasForeignKey("DepartmentId");
 
                     b.Navigation("Department");
@@ -406,9 +406,9 @@ namespace CompanyManagement.Infrastructure.Migrations
 
             modelBuilder.Entity("CompanyManagement.Domain.Entities.Department", b =>
                 {
-                    b.Navigation("Projects");
+                    b.Navigation("Employees");
 
-                    b.Navigation("Users");
+                    b.Navigation("Projects");
                 });
 #pragma warning restore 612, 618
         }

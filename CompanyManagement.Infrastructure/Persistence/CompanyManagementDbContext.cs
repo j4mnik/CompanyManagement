@@ -18,7 +18,7 @@ namespace CompanyManagement.Infrastructure.Persistence
         }
 
         public DbSet<Department> Departments { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Employee> Employees { get; set; }
         public DbSet<Project> Projects { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -30,9 +30,9 @@ namespace CompanyManagement.Infrastructure.Persistence
                 .WithOne(s => s.Department)
                 .HasForeignKey(s => s.DepartmentId);
 
-            builder.Entity<User>()
+            builder.Entity<Employee>()
                 .HasOne(u => u.Department)
-                .WithMany(d => d.Users)
+                .WithMany(d => d.Employees)
                 .HasForeignKey(u => u.DepartmentId);
         }
     }

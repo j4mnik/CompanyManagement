@@ -33,7 +33,7 @@ namespace CompanyManagement.Infrastructure.Repositories
 
         public async Task<Department> GetById(int id)
               => await _dbContext.Departments
-                        .Include(d => d.Users)
+                        .Include(d => d.Employees)
                         .FirstAsync(c => c.Id == id);
 
         public Task<Department?> GetByName(string name)
