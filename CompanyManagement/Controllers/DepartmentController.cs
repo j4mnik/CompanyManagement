@@ -92,8 +92,8 @@ namespace CompanyManagement.Controllers
         }
 
 		[HttpPost]
-		[Authorize(Roles = "Owner")]
-		[Route("Department/Project")]
+        [Authorize(Roles = "DepartmentManager, Admin")]
+        [Route("Department/Project")]
 		public async Task<IActionResult> CreateProject(CreateProjectCommand command)
 		{
 			if (!ModelState.IsValid)
