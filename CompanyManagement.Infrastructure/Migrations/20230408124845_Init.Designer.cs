@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CompanyManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(CompanyManagementDbContext))]
-    [Migration("20230331223629_Init")]
+    [Migration("20230408124845_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -51,6 +51,35 @@ namespace CompanyManagement.Infrastructure.Migrations
                     b.HasIndex("CreatedById");
 
                     b.ToTable("Departments");
+                });
+
+            modelBuilder.Entity("CompanyManagement.Domain.Entities.Project", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -117,6 +146,10 @@ namespace CompanyManagement.Infrastructure.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -168,6 +201,10 @@ namespace CompanyManagement.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -255,6 +292,29 @@ namespace CompanyManagement.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("CompanyManagement.Domain.Entities.User", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasDiscriminator().HasValue("User");
+                });
+
             modelBuilder.Entity("CompanyManagement.Domain.Entities.Department", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "CreatedBy")
@@ -262,6 +322,17 @@ namespace CompanyManagement.Infrastructure.Migrations
                         .HasForeignKey("CreatedById");
 
                     b.Navigation("CreatedBy");
+                });
+
+            modelBuilder.Entity("CompanyManagement.Domain.Entities.Project", b =>
+                {
+                    b.HasOne("CompanyManagement.Domain.Entities.Department", "Department")
+                        .WithMany("Projects")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -313,6 +384,22 @@ namespace CompanyManagement.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CompanyManagement.Domain.Entities.User", b =>
+                {
+                    b.HasOne("CompanyManagement.Domain.Entities.Department", "Department")
+                        .WithMany("Users")
+                        .HasForeignKey("DepartmentId");
+
+                    b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("CompanyManagement.Domain.Entities.Department", b =>
+                {
+                    b.Navigation("Projects");
+
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

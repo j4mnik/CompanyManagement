@@ -33,7 +33,7 @@ namespace CompanyManagement.Controllers
         }
 
 
-        [Authorize(Roles = "Owner")]
+        [Authorize(Roles = "DepartmentManager, Admin")]
         public IActionResult Create()
         {
             return View();
@@ -91,27 +91,27 @@ namespace CompanyManagement.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-		[HttpPost]
-		[Authorize(Roles = "Owner")]
-		[Route("Department/Project")]
-		public async Task<IActionResult> CreateProject(CreateProjectCommand command)
-		{
-			if (!ModelState.IsValid)
-			{
-				return BadRequest(ModelState);
+        [HttpPost]
+        [Authorize(Roles = "DepartmentManager, Admin")]
+        [Route("Department/Project")]
+        public async Task<IActionResult> CreateProject(CreateProjectCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
 
-			}
-			await _mediator.Send(command);
+            }
+            await _mediator.Send(command);
 
-			return Ok();
-		}
+            return Ok();
+        }
 
-		[HttpGet]
-		[Route("Department/{Id}/Project")]
-		public async Task<IActionResult> GetProjects(int id)
-		{
-			var data = await _mediator.Send(new GetProjectQuery() { Id = id });
-			return Ok(data);
-		}
-	}
+        [HttpGet]
+        [Route("Department/{Id}/Project")]
+        public async Task<IActionResult> GetProjects(int id)
+        {
+            var data = await _mediator.Send(new GetProjectQuery() { Id = id });
+            return Ok(data);
+        }
+    }
 }
