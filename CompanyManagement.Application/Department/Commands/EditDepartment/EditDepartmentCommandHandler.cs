@@ -24,7 +24,7 @@ namespace CompanyManagement.Application.Department.Commands.EditDepartment
             var department = await _repository.GetById(request.Id!);
 
             var user = _userContext.GetCurrentUser();
-            var isEditable = user != null && department.CreatedById == user.Id || user.IsInRole("Moderator");
+            var isEditable = user != null && department.CreatedById == user.Id || user.IsInRole("Admin");
 
 
             if (!isEditable)

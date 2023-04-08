@@ -12,8 +12,12 @@ namespace CompanyManagement.Application.Project
         public int Id { get; set; }
         public string Name { get; set; } = default!;
         public string Description { get; set; } = default!;
-        public int DepartmentId { get; set; } = default!;
         public ProjectStatus Status { get; set; } = default!;
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public decimal Budget { get; set; }
+        public decimal ActualCost { get; set; }
+        public int DepartmentId { get; set; } = default!;
     }
 
     public enum ProjectStatus

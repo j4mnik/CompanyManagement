@@ -24,9 +24,11 @@ namespace CompanyManagement.Infrastructure.Extensions
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<CompanyManagementDbContext>();
 
-
+    
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
+
+       
         }
     }
 }
