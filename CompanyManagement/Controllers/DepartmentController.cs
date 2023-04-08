@@ -91,14 +91,14 @@ namespace CompanyManagement.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost]
-        [Authorize(Roles = "DepartmentManager, Admin")]
-        [Route("Department/Project")]
-        public async Task<IActionResult> CreateProject(CreateProjectCommand command)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
+		[HttpPost]
+		[Authorize(Roles = "Owner")]
+		[Route("Department/Project")]
+		public async Task<IActionResult> CreateProject(CreateProjectCommand command)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
 
             }
             await _mediator.Send(command);

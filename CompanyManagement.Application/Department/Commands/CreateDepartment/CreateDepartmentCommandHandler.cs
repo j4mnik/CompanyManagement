@@ -26,7 +26,7 @@ namespace CompanyManagement.Application.Department.Commands.CreateDeprartment
         public async Task<Unit> Handle(CreateDepartmentCommand request, CancellationToken cancellationToken)
         {
             var currentUser = _userContext.GetCurrentUser();
-            if (currentUser == null || (!currentUser.IsInRole("DepartmentManager") && !currentUser.IsInRole("Admin")))
+            if(currentUser == null || !currentUser.IsInRole("Owner"))
             {
                 return Unit.Value;
             }
