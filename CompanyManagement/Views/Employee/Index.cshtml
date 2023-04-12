@@ -4,28 +4,32 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Employees</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table>
-    <thead>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Created Date</th>
-            <th>Department</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var employee in Model)
-        {
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
             <tr>
-                <td>@employee.FirstName</td>
-                <td>@employee.LastName</td>
-                <td>@employee.CreatedDate</td>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Created Date</th>
+                <th>Department</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var employee in Model)
+            {
+                <tr>
+                    <td>@employee.FirstName</td>
+                    <td>@employee.LastName</td>
+                    <td>@employee.CreatedDate</td>
+                    <td>@employee.DepartmentId</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

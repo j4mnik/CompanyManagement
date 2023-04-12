@@ -13,6 +13,7 @@ namespace CompanyManagement.Application.Employee
         public string LastName { get; set; }
         public string Email { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+        public int? DepartmentId { get; set; }
 
     }
 }
