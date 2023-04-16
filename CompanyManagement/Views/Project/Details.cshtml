@@ -1,4 +1,6 @@
-﻿@model CompanyManagement.Application.Project.ProjectDto
+﻿@using CompanyManagement.Application.ProjectTask.Commands;
+@model CompanyManagement.Application.Project.ProjectDto
+
 
 @{
     ViewData["Title"] = "Details";
@@ -42,7 +44,18 @@
         </dd>
     </dl>
 </div>
+
+<div>
+    <partial name="_CreateProjectTask" model="new CreateProjectTaskCommand() {Id=Model.Id}" />
+</div>
+
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     <a asp-action="Index">Back to List</a>
 </div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script src="~/js/Project/Details.js"></script>
+    }
+}

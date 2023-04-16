@@ -19,6 +19,8 @@ namespace CompanyManagement.Domain.Entities
         public int DepartmentId { get; set; } = default!;
         public Department Department { get; set; } = default!;
 
+        public List<ProjectTask> Tasks { get; set; } = new();
+
     }
     public enum ProjectStatus
     {

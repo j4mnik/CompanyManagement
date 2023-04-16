@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CompanyManagement.Application.Project;
+using CompanyManagement.Application.ProjectTask;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,9 @@ namespace CompanyManagement.Application.Mappings
         {
             CreateMap<ProjectDto, Domain.Entities.Project>()
              .ReverseMap();
+
+            CreateMap<ProjectTaskDto, Domain.Entities.ProjectTask>()
+                .ReverseMap();
         }
     }
 }
