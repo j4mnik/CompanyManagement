@@ -32,6 +32,7 @@ namespace CompanyManagement.Application.ProjectTask.Commands
             {
                 Name = request.Name,
                 Description = request.Description,
+                Status = (Domain.Entities.ProjectTask.ProjectTaskStatus)request.Status,
                 ProjectId = project.Id,
             };
 

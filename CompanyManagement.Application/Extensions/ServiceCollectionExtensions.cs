@@ -25,6 +25,7 @@ namespace CompanyManagement.Application.Extensions
             services.AddScoped<IUserContext, UserContext>();
             services.AddScoped<IEmployeeService, EmployeeService>();
 
+
             services.AddScoped(provider => new MapperConfiguration(cfg =>
             {
                 var scope = provider.CreateScope();

@@ -1,6 +1,7 @@
 ﻿using CompanyManagement.Domain.Entities;
 using CompanyManagement.Domain.Interfaces;
 using CompanyManagement.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,5 +24,11 @@ namespace CompanyManagement.Infrastructure.Repositories
             _dbContext.Tasks.Add(projectTask);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<ProjectTask>> GetAllById(int id)
+            => await _dbContext.Tasks
+             .Where(p => p.Project.Id == id)
+             .ToListAsync();
+
     }
 }

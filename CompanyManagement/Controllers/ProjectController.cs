@@ -3,11 +3,13 @@ using CompanyManagement.Application.Project.Commands;
 using CompanyManagement.Application.Project.Queries.GetProject;
 using CompanyManagement.Application.Project.Queries.GetProjectByIdQuery;
 using CompanyManagement.Application.ProjectTask.Commands;
+using CompanyManagement.Application.ProjectTask.Queries.GetProjectTasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System.Data;
+using System.Security;
 
 namespace CompanyManagement.Controllers
 {
@@ -31,6 +33,8 @@ namespace CompanyManagement.Controllers
 			return View(dto);
 		}
 
+
+
 		[HttpPost]
         [Authorize(Roles = "DepartmentManager, Admin")]
 		[Route("Project/ProjectTask")]
@@ -44,9 +48,15 @@ namespace CompanyManagement.Controllers
 			await _mediator.Send(command);
 
 			return Ok();
-
-
 		}
+
+        [HttpGet]
+        [Route("Project/{Id}/ProjectTask")]
+        public async Task<IActionResult> GetProjectTasks(int id)
+        {
+            var data = await _mediator.Send(new GetProjectTaskQuery() { Id = id });
+            return Ok(data);
+        }
     }
 
 }

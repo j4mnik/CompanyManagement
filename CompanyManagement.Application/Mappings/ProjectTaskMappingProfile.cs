@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace CompanyManagement.Application.Mappings
 {
-    public class ProjectMappingProfile : Profile
+    public class ProjectTaskMappingProfile : Profile 
     {
-        public ProjectMappingProfile() 
+        public ProjectTaskMappingProfile()
         {
-            CreateMap<ProjectDto, Domain.Entities.Project>()
+            CreateMap<ProjectTaskDto, Domain.Entities.ProjectTask>()
              .ReverseMap();
 
-     
+    
         }
     }
 }

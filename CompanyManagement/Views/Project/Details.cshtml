@@ -3,59 +3,46 @@
 
 
 @{
-    ViewData["Title"] = "Details";
+	ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
 
+<a asp-controller="Department" asp-action="Index" class="btn btn-link mb-1">
+	<i class="bi bi-arrow-left-short align-middle fs-2"></i>
+</a>
+<div class="d-flex flex-column mb-2">
+	<div class="bg-primary text-white py-2 px-3">
+		<h4>Project</h4>
+	</div>
+	<div class="flex bg-primary text-white bg-opacity-75 p-3 ">
+		<h3>@Html.DisplayFor(model => model.Name)</h3>
+
+		<a class="btn btn-outline-light" asp-controller="Department" asp-action="Edit" asp-route-Id="@Model.Id">
+			<i class="bi bi-pencil-fill align-middle"></i> Edit
+		</a>
+	</div>
+</div>
 <div>
-    <h4>ProjectDto</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DepartmentId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DepartmentId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-    </dl>
+</div>
+<div class="mt-4">
+	<span class="fw-bold">@Html.DisplayNameFor(model => model.Description)</span>  @Html.DisplayFor(model => model.Description)
+</div>
+<div class="mt-2">
+	<span class="fw-bold">@Html.DisplayNameFor(model => model.Status)</span>  @Html.DisplayFor(model => model.Status)
 </div>
 
-<div>
-    <partial name="_CreateProjectTask" model="new CreateProjectTaskCommand() {Id=Model.Id}" />
+<div class="mt-4">
+	<partial name="_CreateProjectTask" model="new CreateProjectTaskCommand() {Id=Model.Id}" />
 </div>
 
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+
+<div class="my-4">
+	<div id="tasks" class="column" data-id="@Model.Id"></div>
 </div>
+
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        <script src="~/js/Project/Details.js"></script>
-    }
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+		<script src="~/js/Project/Details.js"></script>
+	}
 }
