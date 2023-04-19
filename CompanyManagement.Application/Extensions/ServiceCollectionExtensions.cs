@@ -31,6 +31,7 @@ namespace CompanyManagement.Application.Extensions
                 var scope = provider.CreateScope();
                 var userContext = scope.ServiceProvider.GetRequiredService<IUserContext>();
                 cfg.AddProfile(new DepartmentMappingProfile(userContext));
+                cfg.AddProfile(new ProjectMappingProfile(userContext));
                 cfg.AddProfile(new EmployeeMappingProfile());
             }).CreateMapper());
 

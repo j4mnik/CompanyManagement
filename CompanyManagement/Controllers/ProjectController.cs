@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
+using CompanyManagement.Application.Department.Commands.EditDepartment;
+using CompanyManagement.Application.Department.Queries.GetDepartmentByIdQuery;
 using CompanyManagement.Application.Project.Commands;
+using CompanyManagement.Application.Project.Commands.EditProject;
 using CompanyManagement.Application.Project.Queries.GetProject;
 using CompanyManagement.Application.Project.Queries.GetProjectByIdQuery;
 using CompanyManagement.Application.ProjectTask.Commands;
@@ -34,9 +37,38 @@ namespace CompanyManagement.Controllers
 		}
 
 
+		[Route("Project/{Id}/Edit")]
+		public async Task<IActionResult> Edit(int Id)
+		{
+			var dto = await _mediator.Send(new GetProjectByIdQuery(Id));
+
+			if (!dto.IsEditable)
+			{
+				return RedirectToAction("NoAccess", "Home");
+			}
+
+			EditProjectCommand model = _mapper.Map<EditProjectCommand>(dto);
+
+			return View(model);
+		}
 
 		[HttpPost]
-        [Authorize(Roles = "DepartmentManager, Admin")]
+		[Route("Project/{Id}/Edit")]
+		public async Task<IActionResult> Edit(int Id, EditProjectCommand command)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View(command);
+			}
+
+			await _mediator.Send(command);
+
+			return RedirectToAction("Details", new { Id = command.Id });
+		}
+
+
+		[HttpPost]
+        [Authorize(Roles = "Admin")]
 		[Route("Project/ProjectTask")]
 		public async Task<IActionResult> CreateProjectTask(CreateProjectTaskCommand command)
 		{

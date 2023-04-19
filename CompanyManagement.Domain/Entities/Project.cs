@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,10 @@ namespace CompanyManagement.Domain.Entities
         public DateTime EndDate { get; set; }
         public decimal Budget { get; set; }
         public decimal ActualCost { get; set; }
-        public int DepartmentId { get; set; } = default!;
+		public string? CreatedById { get; set; }
+		public IdentityUser? CreatedBy { get; set; }
+		public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+		public int DepartmentId { get; set; } = default!;
         public Department Department { get; set; } = default!;
 
         public List<ProjectTask> Tasks { get; set; } = new();

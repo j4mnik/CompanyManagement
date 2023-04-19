@@ -4,7 +4,7 @@ using CompanyManagement.Application.Department.Commands.CreateDeprartment;
 using CompanyManagement.Application.Department.Commands.EditDepartment;
 using CompanyManagement.Application.Department.Queries.GetAllDepartments;
 using CompanyManagement.Application.Department.Queries.GetDepartmentByIdQuery;
-using CompanyManagement.Application.Project.Commands;
+using CompanyManagement.Application.Project.Commands.CreateProject;
 using CompanyManagement.Application.Project.Queries.GetProject;
 using CompanyManagement.Extensions;
 using CompanyManagement.Models;
@@ -110,7 +110,7 @@ namespace CompanyManagement.Controllers
         [Route("Department/{Id}/Project")]
         public async Task<IActionResult> GetProjects(int id)
         {
-            var data = await _mediator.Send(new GetProjectQuery() { Id = id });
+            var data = await _mediator.Send(new GetAllProjectsQuery() { Id = id });
             return Ok(data);
         }
     }

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using CompanyManagement.Application.Project.Queries.GetProject;
 using CompanyManagement.Application.Project;
 using CompanyManagement.Domain.Interfaces;
 using MediatR;

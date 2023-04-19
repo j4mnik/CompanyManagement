@@ -6,12 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CompanyManagement.Application.Project.Commands
+namespace CompanyManagement.Application.Project.Commands.CreateProject
 {
     public class CreateProjectCommandValidator : AbstractValidator<CreateProjectCommand>
     {
 
-        public CreateProjectCommandValidator() {
+        public CreateProjectCommandValidator()
+        {
             RuleFor(s => s.Name).NotEmpty();
             RuleFor(s => s.Description).NotEmpty();
         }

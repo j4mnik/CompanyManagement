@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CompanyManagement.Application.Project.Commands
+namespace CompanyManagement.Application.Project.Commands.CreateProject
 {
     public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand>
     {
@@ -16,9 +16,9 @@ namespace CompanyManagement.Application.Project.Commands
         private readonly IDepartmentRepository _departmentRepository;
         private readonly IProjectRepository _projectRepository;
 
-        public CreateProjectCommandHandler(IUserContext userContext, IDepartmentRepository departmentRepository, 
+        public CreateProjectCommandHandler(IUserContext userContext, IDepartmentRepository departmentRepository,
             IProjectRepository projectRepository)
-        { 
+        {
             _userContext = userContext;
             _departmentRepository = departmentRepository;
             _projectRepository = projectRepository;
@@ -35,7 +35,7 @@ namespace CompanyManagement.Application.Project.Commands
             }
 
             var user = _userContext.GetCurrentUser();
-            var isEditable = user != null && (department.CreatedById == user.Id || user.IsInRole("Moderator"));
+            var isEditable = user != null && (department.CreatedById == user.Id || user.IsInRole("Admin"));
 
             if (!isEditable)
             {
@@ -47,8 +47,13 @@ namespace CompanyManagement.Application.Project.Commands
                 Name = request.Name,
                 Description = request.Description,
                 Status = (Domain.Entities.ProjectStatus)request.Status,
-                DepartmentId = department.Id,
-            };
+				StartDate = request.StartDate,
+		        EndDate = request.EndDate,
+			    Budget = request.Budget,
+			    ActualCost = request.ActualCost,
+			    DepartmentId = department.Id,
+				CreatedById = user.Id
+		};
 
             await _projectRepository.Create(project);
 

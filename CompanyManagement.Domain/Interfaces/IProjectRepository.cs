@@ -14,5 +14,7 @@ namespace CompanyManagement.Domain.Interfaces
         Task<IEnumerable<Project>> GetAllById(int id);
 		Task<Domain.Entities.Project> GetById(int id);
 
+		Task Commit();
+
 	}
 }

@@ -19,7 +19,10 @@ namespace CompanyManagement.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task Create(Project project)
+		public Task Commit()
+		   => _dbContext.SaveChangesAsync();
+
+		public async Task Create(Project project)
         {
             _dbContext.Projects.Add(project);
             await _dbContext.SaveChangesAsync();

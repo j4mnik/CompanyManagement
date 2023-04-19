@@ -1,22 +1,24 @@
 ﻿using AutoMapper;
+using CompanyManagement.Application.ApplicationUser;
 using CompanyManagement.Application.Project;
-using CompanyManagement.Application.ProjectTask;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CompanyManagement.Application.Project.Commands.EditProject;
+
 
 namespace CompanyManagement.Application.Mappings
 {
     public class ProjectMappingProfile : Profile
     {
-        public ProjectMappingProfile() 
+        public ProjectMappingProfile(IUserContext userContext) 
         {
-            CreateMap<ProjectDto, Domain.Entities.Project>()
-             .ReverseMap();
+			var user = userContext.GetCurrentUser();
 
-     
-        }
+			CreateMap<ProjectDto, Domain.Entities.Project>();
+
+			CreateMap<Domain.Entities.Project, ProjectDto>()
+			 .ForMember(dto => dto.IsEditable, opt => opt.MapFrom(src => user != null && (src.CreatedById == user.Id || user.IsInRole("Admin"))));
+
+			CreateMap<ProjectDto, EditProjectCommand>();
+
+		}
     }
 }

@@ -21,7 +21,7 @@ namespace CompanyManagement.Application.Mappings
             CreateMap<DepartmentDto, Domain.Entities.Department>();
 
             CreateMap<Domain.Entities.Department, DepartmentDto>()
-                .ForMember(dto => dto.IsEditable, opt => opt.MapFrom(src => user != null && (src.CreatedById == user.Id || user.IsInRole("Moderator"))));
+                .ForMember(dto => dto.IsEditable, opt => opt.MapFrom(src => user != null && (src.CreatedById == user.Id || user.IsInRole("Admin"))));
 
             CreateMap<DepartmentDto, EditDepartmentCommand>();
 

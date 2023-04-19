@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CompanyManagement.Application.Project.Queries.GetProject
 {
-    public class GetProjectQuery : IRequest<IEnumerable<ProjectDto>>
+    public class GetAllProjectsQuery : IRequest<IEnumerable<ProjectDto>>
     {
         public int Id { get; set; } = default!;
     }
