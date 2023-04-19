@@ -4,16 +4,21 @@ $(document).ready(function () {
         container.empty();
 
         for (const task of tasks) {
+            const statusText = task.status === 0 ? "In Progress" : "Completed";
+            const bgColorClass = task.status === 0 ? "bg-primary" : "bg-success";
             const taskCard = $(`
-            <div class="card mb-4 w-100">
-                <div class="card-body">
-                    <h5 class="card-title">${task.name}</h5>
-                    <p class="card-text">${task.description}</p>
-                    <p class="card-text">${task.status}</p>
-                    <button class="btn btn-primary details-button" data-project-id="${task.id}">
-                        View details
-                    </button>
+            <div class="card mb-4 w-100">  
+                <div class="${bgColorClass} bg-opacity-50 m-0 p-2">
+                   <h5 class="card-title text-white ">${task.name}</h5>
                 </div>
+                <div class="m-2">
+                  <p class="card-text">${task.description}</p>
+                  <p class="card-text">${statusText}</p>
+                  </div>
+                    <button class="btn btn-light details-button" data-project-id="${task.id}">
+                        Manage task
+                    </button>
+              
             </div>`);
 
             taskCard.find(".details-button").click(() => {

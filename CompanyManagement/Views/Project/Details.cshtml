@@ -16,26 +16,30 @@
 	</div>
 	<div class="flex bg-primary text-white bg-opacity-75 p-3 ">
 		<h3>@Html.DisplayFor(model => model.Name)</h3>
-
-		<a class="btn btn-outline-light" asp-controller="Department" asp-action="Edit" asp-route-Id="@Model.Id">
-			<i class="bi bi-pencil-fill align-middle"></i> Edit
-		</a>
 	</div>
 </div>
 <div>
 </div>
-<div class="mt-4">
-	<span class="fw-bold">@Html.DisplayNameFor(model => model.Description)</span>  @Html.DisplayFor(model => model.Description)
-</div>
-<div class="mt-2">
-	<span class="fw-bold">@Html.DisplayNameFor(model => model.Status)</span>  @Html.DisplayFor(model => model.Status)
+<div class="d-flex justify-content-between mt-4 mb-4 w-100">
+	<div>
+		<p><span class="fw-bold">@Html.DisplayNameFor(model => model.Description):</span>  @Html.DisplayFor(model => model.Description)</p>
+		<p>	<span class="fw-bold">@Html.DisplayNameFor(model => model.Status):</span>  @Html.DisplayFor(model => model.Status)</p>
+	</div>
+	<div>
+		<a class="btn btn-outline-primary" asp-controller="Department" asp-action="Edit" asp-route-Id="@Model.Id">
+			<i class="bi bi-pencil-fill align-middle"></i> Edit
+		</a>
+	</div>
+	
 </div>
 
-<div class="mt-4">
+ <hr />
+<div>
+	<h4>Tasks</h4>
+</div>
+<div >
 	<partial name="_CreateProjectTask" model="new CreateProjectTaskCommand() {Id=Model.Id}" />
 </div>
-
-
 <div class="my-4">
 	<div id="tasks" class="column" data-id="@Model.Id"></div>
 </div>
