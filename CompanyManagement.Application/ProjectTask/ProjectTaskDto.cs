@@ -13,7 +13,9 @@ namespace CompanyManagement.Application.ProjectTask
         public string Name { get; set; }
         public string Description { get; set; }
 		public ProjectTaskStatus Status { get; set; } = default!;
+		public bool IsEditable { get; set; }
 		public int ProjectId { get; set; } = default!;
+		public string? CreatedById { get; set; }
 
 		public enum ProjectTaskStatus
 		{

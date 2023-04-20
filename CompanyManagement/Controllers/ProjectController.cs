@@ -6,6 +6,8 @@ using CompanyManagement.Application.Project.Commands.EditProject;
 using CompanyManagement.Application.Project.Queries.GetProject;
 using CompanyManagement.Application.Project.Queries.GetProjectByIdQuery;
 using CompanyManagement.Application.ProjectTask.Commands;
+using CompanyManagement.Application.ProjectTask.Commands.EditProjectTask;
+using CompanyManagement.Application.ProjectTask.Queries.GetProjectTaskByIdQuery;
 using CompanyManagement.Application.ProjectTask.Queries.GetProjectTasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

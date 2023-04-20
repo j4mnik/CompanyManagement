@@ -19,7 +19,10 @@ namespace CompanyManagement.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task Create(ProjectTask projectTask)
+		public Task Commit()
+			  => _dbContext.SaveChangesAsync();
+
+		public async Task Create(ProjectTask projectTask)
         {
             _dbContext.Tasks.Add(projectTask);
             await _dbContext.SaveChangesAsync();
@@ -30,5 +33,8 @@ namespace CompanyManagement.Infrastructure.Repositories
              .Where(p => p.Project.Id == id)
              .ToListAsync();
 
-    }
+		public async Task<ProjectTask> GetById(int id)
+			=> await _dbContext.Tasks.FirstAsync(c => c.Id == id);
+
+	}
 }

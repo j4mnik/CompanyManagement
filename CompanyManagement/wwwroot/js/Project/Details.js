@@ -9,27 +9,19 @@ $(document).ready(function () {
             const taskCard = $(`
             <div class="card mb-4 w-100">  
                 <div class="${bgColorClass} bg-opacity-50 m-0 p-2">
-                   <h5 class="card-title text-white ">${task.name}</h5>
+                    <h5 class="card-title text-white ">${task.name}</h5>
                 </div>
                 <div class="m-2">
-                  <p class="card-text">${task.description}</p>
-                  <p class="card-text">${statusText}</p>
-                  </div>
-                    <button class="btn btn-light details-button" data-project-id="${task.id}">
-                        Manage task
-                    </button>
-              
+                    <p class="card-text">${task.description}</p>
+                    <p class="card-text">${statusText}</p>
+                </div>
+                <a href="/ProjectTask/${task.id}/Edit" class="btn btn-light details-button">Manage task</a>
             </div>`);
-
-            taskCard.find(".details-button").click(() => {
-                const taskId = task.id;
-                const projectId = project.id;
-                const url = `/Project/${projectId}/ProjectTask`
-            });
 
             container.append(taskCard);
         }
     }
+
 
 
     const LoadTasks = () => {
@@ -43,7 +35,6 @@ $(document).ready(function () {
                 if (!data.length) {
                     container.html("There are no tasks for this project")
                 } else {
-                    console.log("xd")
                     RenderTasks(data, container)
                 }
             },

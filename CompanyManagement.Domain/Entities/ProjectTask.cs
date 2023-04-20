@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,9 @@ namespace CompanyManagement.Domain.Entities
 		public ProjectTaskStatus Status { get; set; } = default!;
 		public int ProjectId { get; set; } = default!;
         public Project Project { get; set; } = default!;
+
+		public string? CreatedById { get; set; }
+		public IdentityUser? CreatedBy { get; set; }
 
 		public enum ProjectTaskStatus
 		{

@@ -12,5 +12,9 @@ namespace CompanyManagement.Domain.Interfaces
         Task Create(ProjectTask projectTask);
 
         Task<IEnumerable<ProjectTask>> GetAllById(int id);
-    }
+
+		Task<Domain.Entities.ProjectTask> GetById(int id);
+
+		Task Commit();
+	}
 }
