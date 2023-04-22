@@ -16,7 +16,9 @@ namespace CompanyManagement.Domain.Entities
 
         public int? DepartmentId { get; set; } 
 
-        public Department? Department { get; set; } 
+        public Department? Department { get; set; }
+        public virtual ICollection<ProjectTask> Tasks { get; set; }
+
 
     }
 }

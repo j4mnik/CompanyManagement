@@ -25,5 +25,10 @@ namespace CompanyManagement.Infrastructure.Repositories
             _context.Add(employee);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<Employee> GetById(int id)
+        {
+            return await _context.Employees.FirstOrDefaultAsync(e => e.Id == id);
+        }
     }
 }

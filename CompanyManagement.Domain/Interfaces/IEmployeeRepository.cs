@@ -11,5 +11,6 @@ namespace CompanyManagement.Domain.Interfaces
     {
         Task<IEnumerable<Employee>> GetAllEmployees();
         Task Create(Domain.Entities.Employee employee);
+        Task<Employee> GetById(int id);
     }
 }

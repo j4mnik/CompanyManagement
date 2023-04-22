@@ -16,8 +16,10 @@ namespace CompanyManagement.Application.ProjectTask
 		public bool IsEditable { get; set; }
 		public int ProjectId { get; set; } = default!;
 		public string? CreatedById { get; set; }
+        public int? EmployeeId { get; set; }
 
-		public enum ProjectTaskStatus
+
+        public enum ProjectTaskStatus
 		{
 			InProgress,
 			Completed

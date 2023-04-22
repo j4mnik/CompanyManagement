@@ -12,17 +12,19 @@ namespace CompanyManagement.Domain.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-		public ProjectTaskStatus Status { get; set; } = default!;
-		public int ProjectId { get; set; } = default!;
+        public ProjectTaskStatus Status { get; set; } = default!;
+        public int ProjectId { get; set; } = default!;
         public Project Project { get; set; } = default!;
 
-		public string? CreatedById { get; set; }
-		public IdentityUser? CreatedBy { get; set; }
+        public string? CreatedById { get; set; }
+        public IdentityUser? CreatedBy { get; set; }
+        public string? EmployeeId { get; set; }
+        public Employee? Employee { get; set; }
 
-		public enum ProjectTaskStatus
-		{
-			InProgress,
-			Completed
-		}
-	}
+        public enum ProjectTaskStatus
+        {
+            InProgress,
+            Completed
+        }
+    }
 }

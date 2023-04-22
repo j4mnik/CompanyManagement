@@ -15,17 +15,23 @@ namespace CompanyManagement.Application.ProjectTask.Commands
         private readonly IUserContext _userContext;
         private readonly IProjectRepository _projectReposiotry;
         private readonly IProjectTaskRepository _projectTaskRepository;
+        private readonly IEmployeeRepository _employeeRepository;
 
-        public CreateProjectTaskCommandHandler(IUserContext userContext, IProjectRepository projectRepository, IProjectTaskRepository projectTaskRepository)
+        public CreateProjectTaskCommandHandler(IUserContext userContext, IProjectRepository projectRepository, IProjectTaskRepository projectTaskRepository, IEmployeeRepository employeeRepository)
         {
             _userContext = userContext;
             _projectReposiotry = projectRepository;
             _projectTaskRepository = projectTaskRepository;
+            _employeeRepository = employeeRepository;
         }
 
         public async Task<Unit> Handle(CreateProjectTaskCommand request, CancellationToken cancellationToken)
         {
             var project = await _projectReposiotry.GetById(request.Id!);
+
+
+            var employee = await _employeeRepository.GetById((int)request.EmployeeId);
+
 
 
             var projectTask = new Domain.Entities.ProjectTask()
@@ -34,9 +40,11 @@ namespace CompanyManagement.Application.ProjectTask.Commands
                 Description = request.Description,
                 Status = (Domain.Entities.ProjectTask.ProjectTaskStatus)request.Status,
                 ProjectId = project.Id,
-            };
+                Employee = employee
+        };
+           
 
-          
+
             await _projectTaskRepository.Create(projectTask);
 
             return Unit.Value;
