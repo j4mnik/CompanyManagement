@@ -18,8 +18,8 @@ namespace CompanyManagement.Domain.Entities
 
         public string? CreatedById { get; set; }
         public IdentityUser? CreatedBy { get; set; }
-        public string? EmployeeId { get; set; }
-        public Employee? Employee { get; set; }
+        public int EmployeeId { get; set; }
+        public Employee Employee { get; set; }
 
         public enum ProjectTaskStatus
         {

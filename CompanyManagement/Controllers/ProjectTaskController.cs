@@ -24,10 +24,7 @@ namespace CompanyManagement.Controllers
 		{
 			var dto = await _mediator.Send(new GetProjectTaskByIdQuery(Id));
 
-			if (!dto.IsEditable)
-			{
-				return RedirectToAction("NoAccess", "Home");
-			}
+		
 
 			EditProjectTaskCommand model = _mapper.Map<EditProjectTaskCommand>(dto);
 
