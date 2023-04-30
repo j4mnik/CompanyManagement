@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CompanyManagement.Application.Employee;
 using CompanyManagement.Domain.Interfaces;
 using MediatR;
 using System;
@@ -24,7 +25,12 @@ namespace CompanyManagement.Application.Department.Queries.GetDepartmentByIdQuer
         {
             var department = await _departmentRepository.GetById(request.Id);
 
-            var dto = _mapper.Map<DepartmentDto>(department);
+			var departmentDto = _mapper.Map<DepartmentDto>(department);
+
+			var employees = department.Employees.Select(e => _mapper.Map<EmployeeDto>(e)).ToList();
+			departmentDto.Employees = employees;
+
+			var dto = _mapper.Map<DepartmentDto>(department);
 
             return dto;
         }

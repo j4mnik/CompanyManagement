@@ -2,18 +2,31 @@
     container.empty();
 
     for (const project of projects) {
+        let statusText;
+        switch (project.status) {
+            case 0:
+                statusText = 'Not started';
+                break;
+            case 1:
+                statusText = 'In progress';
+                break;
+            case 2:
+                statusText = 'Completed';
+                break;
+            default:
+                statusText = 'Unknown';
+        }
+
         const projectCard = $(`
-            <div class="card mb-4 w-100">
+            <div class="card mb-4 w-100 bg-opacity-10" style="cursor: pointer;"onmouseover="this.classList.add('bg-primary', 'border-primary')" onmouseout="this.classList.remove('bg-primary', 'border-primary')">
                 <div class="card-body">
                     <h5 class="card-title">${project.name}</h5>
                     <p class="card-text">${project.description}</p>
-                    <button class="btn btn-primary details-button" data-project-id="${project.id}">
-                        View details
-                    </button>
+                    <p class="card-text">${statusText}</p>
                 </div>
             </div>`);
 
-        projectCard.find(".details-button").click(() => {
+        projectCard.click(() => {
             const projectId = project.id;
             const url = `/Project/${projectId}/Details`;
             window.location.href = url;
@@ -43,4 +56,3 @@ const LoadProjects = () => {
         }
     })
 }
-

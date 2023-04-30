@@ -20,6 +20,6 @@ namespace CompanyManagement.Application.Department
 
         public bool IsEditable { get; set; }
 
-        public List<EmployeeDto> Users { get; set; } = new();
-    }
+		public List<EmployeeDto> Employees { get; set; } = new List<EmployeeDto>();
+	}
 }
