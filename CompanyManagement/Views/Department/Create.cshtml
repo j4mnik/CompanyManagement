@@ -2,25 +2,24 @@
 
 @model CreateDepartmentCommand
 
-<a href="@Url.Action("Index")" class="btn btn-light">
-	<i class="bi bi-arrow-left-short align-middle fs-5"></i> Return
+<a href="@Url.Action("Index")" class="btn btn-link mb-1">
+	<i class="bi bi-arrow-left-short align-middle fs-2"></i>
 </a>
 
-<h1>Create department</h1>
-
-<div class="col">
+<h2 class="fw-bold">Create department</h2>
+<div class="col p-4 rounded mt-4 border shadow-sm">
 	<form action="/Department/Create" method="post" >
 		<div class="form-group mb-2">
-			<label class="control-label" asp-for="Name">Name</label>
-			<input class="form-control" type="text" asp-for="Name">
+			<label class="control-label fw-bold mb-2" asp-for="Name">Department name</label>
+			<input class="form-control" type="text" placeholder="E.g. Software Development" asp-for="Name">
 			<span asp-validation-for="Name" class="text-danger"></span>
 		</div>
 		<div class="form-group mb-2">
-			<label class="control-label" asp-for="Description">Description</label>
-			<input class="form-control" type="text" asp-for="Description">
+			<label class="control-label fw-bold mb-2" asp-for="Description">Description</label>
+			<textarea class="form-control" type="text" placeholder="E.g. Department responsible for building and maintaining software solutions." style="resize: none;" asp-for="Description"></textarea>
 			<span asp-validation-for="Description" class="text-danger"></span>
 		</div>
-		<div class="form-group mt-2">
+		<div class="form-group mt-4 text-end">
 			<input type="submit" value="Create" class="btn btn-primary">
 		</div>
 	</form>

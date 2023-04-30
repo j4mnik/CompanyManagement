@@ -32,14 +32,26 @@ namespace CompanyManagement.Controllers
         {
             var departments = await _mediator.Send(new GetAllDepartmentsQuery());
             ViewBag.Departments = departments;
-            return View();
+
+			var currentDate = DateTime.Now;
+			var employee = new EmployeeDto { CreatedDate = currentDate };
+
+			return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(EmployeeDto employee)
         {
             await _employeeService.Create(employee);
-            return RedirectToAction(nameof(Create));
+     
+
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(Create));
+            }
+        
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

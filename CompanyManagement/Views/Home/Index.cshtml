@@ -2,28 +2,31 @@
     ViewData["Title"] = "Home Page";
 }
 <div class="d-flex flex-column">
-    <div class="d-flex flex-column  justify-content-center align-items-center p-4 text-center" style="height: 50vh; background-color: rgba(177, 210, 255, 1);
+    <div class="d-flex flex-column justify-content-center align-items-center p-4 text-center" style="height: 60vh; background-color: rgba(177, 210, 255, 1);
     background-image: radial-gradient(circle, rgba(177, 210, 255, 1) 0%, rgba(255, 255, 255, 1) 33%);">
-        <h1 class="fw-bold">Company Management</h1>
+        <h1 class="display-1" style="font-weight: 800;">Company Management</h1>
     </div>
+
+    <div class="m-2">
     <div>
         <p class="fw-bold fs-5">Shortcuts</p>
     </div>
     <div class="d-flex flex-row flex-wrap">
-        <div class="shadow-sm p-3 mb-5 bg-white rounded mr-4" style="width: 24rem;">
+            <div class="shadow-sm p-3 mb-5 bg-white rounded mx-lg-4" style="width: 24rem;">
             <div class="p-2">
                 <h5 class="card-title">Departments</h5>
                 <p class="card-text">Get information about departments. You can add and manage specific department.</p>
                 <a asp-controller="Department" class="card-link">Go to departments</a>
             </div>
         </div>
-        <div class="shadow-sm p-3 mb-5 bg-white rounded mx-4" style="width: 24rem;">
+        <div class="shadow-sm p-3 mb-5 bg-white rounded/" style="width: 24rem;">
             <div class="p-2">
                 <h5 class="card-title">Employees</h5>
                 <p class="card-text">Get information about employees. Add or preview a detail about employee.</p>
                 <a asp-controller="Employee" class="card-link">Go to employees</a>
             </div>
         </div>
+    </div>
     </div>
 </div>
 
