@@ -6,18 +6,23 @@ $(document).ready(function () {
         for (const task of tasks) {
             const statusText = task.status === 0 ? "In Progress" : "Completed";
             const bgColorClass = task.status === 0 ? "bg-primary" : "bg-success";
+            const borderColorClass = task.status === 0 ? "border-primary" : "border-success";
             const taskCard = $(`
-            <div class="card mb-4 w-100">  
-                <div class="${bgColorClass} bg-opacity-50 m-0 p-2">
-                    <h5 class="card-title text-white ">${task.name}</h5>
-                </div>
-                <div class="m-2">
-                    <p class="card-text">${task.description}</p>
-                    <p class="card-text">${statusText}</p>
-                </div>
-                <a href="/ProjectTask/${task.id}/Edit" class="btn btn-light details-button">Manage task</a>
+            <div class="d-flex flex-column flex-wrap my-2 border rounded p-3" style="max-width: 25rem; margin-inline: 1rem;">  
+              <div class="d-flex border ${bgColorClass} ${borderColorClass} bg-opacity-25 rounded px-2 align-items-center justify-content-center mb-3" style="width:fit-content;">
+                    <p class="text-center my-2">${statusText}</p>
+              </div>
+              <div>
+                 <p class="" style="font-weight: 600;">${task.name}</p>
+                 <p class="" style="font-weight: 400;">${task.description}</p>
+              </div>
+              <div>
+              <p class="" style="font-weight: 500;">Is realized by ${task.employeeId}</p>
+              </div>
+              <div>
+               <a href="/ProjectTask/${task.id}/Edit" class="btn btn-outline-dark details-button">Manage task</a>
+              </div>
             </div>`);
-
             container.append(taskCard);
         }
     }

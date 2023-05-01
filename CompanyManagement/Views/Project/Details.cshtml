@@ -10,39 +10,42 @@
 <a asp-controller="Department" asp-action="Index" class="btn btn-link mb-1">
 	<i class="bi bi-arrow-left-short align-middle fs-2"></i>
 </a>
-<div class="d-flex flex-column mb-2">
-	<div class="bg-primary text-white py-2 px-3">
-		<h4>Project</h4>
-	</div>
-	<div class="flex bg-primary text-white bg-opacity-75 p-3 ">
-		<h3>@Html.DisplayFor(model => model.Name)</h3>
-	</div>
-</div>
-<div>
-</div>
-<div class="d-flex justify-content-between mt-4 mb-4 w-100">
+<div class="d-flex flex-row justify-content-between">
+	<h4 class="fw-bold">@Model.Name</h4>
 	<div>
-		<p><span class="fw-bold">@Html.DisplayNameFor(model => model.Description):</span>  @Html.DisplayFor(model => model.Description)</p>
-		<p>	<span class="fw-bold">@Html.DisplayNameFor(model => model.Status):</span>  @Html.DisplayFor(model => model.Status)</p>
-	</div>
-	<div>
-		<a class="btn btn-outline-primary" asp-controller="Project" asp-action="Edit" asp-route-Id="@Model.Id">
+		<a class="btn btn-outline-dark" asp-controller="Project" asp-action="Edit" asp-route-Id="@Model.Id">
 			<i class="bi bi-pencil-fill align-middle"></i> Edit
 		</a>
 	</div>
-	
 </div>
 
- <hr />
-<div>
-	<h4>Tasks</h4>
+<p class="my-4" style="font-size: 1.2rem; font-weight:400;">@Model.Description</p>
+
+<div class="d-flex flex-row flex-wrap mb-4">
+	<div class="d-flex flex-column border rounded p-4 m-2" style="width: 20rem;">
+		<p class="text-uppercase">Status</p>
+		<p style="font-size: 18px; font-weight:600;">@Model.Status</p>
+	</div>
+	<div class="d-flex flex-column border rounded p-4 m-2" style="width: 20rem;">
+		<p class="text-uppercase">Actual Cost</p>
+		<p style="font-size: 18px; font-weight:600;">@Model.ActualCost PLN</p>
+	</div>
+	<div class="d-flex flex-column border rounded p-4 m-2" style="width: 20rem;">
+		<p class="text-uppercase">Project budget</p>
+		<p style="font-size: 18px; font-weight:600;">@Model.Budget PLN</p>
+	</div>
 </div>
-<div >
+
+<div mt-4>
+	<p style="font-size: 22px; font-weight:600;">Tasks</p>
+</div>
+<div>
 	<partial name="_CreateProjectTask" model="new CreateProjectTaskCommand() {Id=Model.Id}" />
 </div>
 <div class="my-4">
-	<div id="tasks" class="column" data-id="@Model.Id"></div>
+	<div id="tasks" class="row flex-wrap" data-id="@Model.Id"></div>
 </div>
+
 
 @section Scripts {
 	@{

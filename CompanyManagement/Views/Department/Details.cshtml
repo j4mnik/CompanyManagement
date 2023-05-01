@@ -27,22 +27,38 @@ background-image: linear-gradient(0deg, rgba(12, 151, 247, 1) 0%, rgba(98, 183, 
 		</div>
 	}
 </div>
-<div class="d-flex flex-row w-100 justify-content-between mb-4">
-	<div class="w-75 mt-4 mr-2 p-4 border rounded">
+<div class="d-flex flex-column flex-sm-row w-100 justify-content-between mb-4">
+	<div class="mt-4 mr-2 p-4 border rounded project-container">
 		<h4 class="" style="font-weight: 600;">Projects</h4>
 		<partial name="CreateProject" model="new CreateProjectCommand() { DepartmentId = Model.Id }" />
 		<div class="my-4">
 			<div id="projects" class="column" data-id="@Model.Id"></div>
 		</div>
 	</div>
-	<div class="mt-4 ml-4 p-4 border rounded">
-		<h4 class="" style="font-weight: 600;"> Department members</h4>
+	<div class="mt-4 ml-4">
+		<div class="border rounded p-4">
+			<h4 class="" style="font-weight: 600;"> Department members</h4>
 			@foreach (var employee in Model.Employees)
 			{
-				<p>@employee.FirstName @employee.LastName</p>}
+				<p>@employee.FirstName @employee.LastName</p>
+			}
+		</div>
+		
 		
 	</div>
 </div>
+
+
+<style>
+	.project-container {
+		width: 75%; 
+	}
+	@@media (max-width: 767px) {
+		.project-container {
+			width: 100%;
+		}
+}
+</style>
 
 
 
@@ -52,3 +68,4 @@ background-image: linear-gradient(0deg, rgba(12, 151, 247, 1) 0%, rgba(98, 183, 
 		<script src="~/js/Department/Details.js"></script>
 	}
 }
+
